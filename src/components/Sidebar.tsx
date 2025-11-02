@@ -1,17 +1,17 @@
-import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, HelpCircle, Home } from "lucide-react";
+import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { icon: Home, label: "Dashboard", path: "/" },
+  { icon: Activity, label: "Dashboard", path: "/" },
+  { icon: Search, label: "Scanner", path: "/scanner" },
   { icon: Shield, label: "Protection", path: "/protection" },
-  { icon: Search, label: "Scans", path: "/scans" },
+  { icon: Eye, label: "Behavior Monitor", path: "/behavior" },
+  { icon: Globe, label: "Network & Firewall", path: "/network" },
+  { icon: BookOpen, label: "Threat Logbook", path: "/logbook" },
   { icon: Lock, label: "Quarantine", path: "/quarantine" },
-  { icon: Globe, label: "Network", path: "/network" },
-  { icon: Layers, label: "Firewall", path: "/firewall" },
-  { icon: AlertTriangle, label: "Alert", path: "/alert" },
-  { icon: Settings, label: "Setting", path: "/setting" },
-  { icon: HelpCircle, label: "Support", path: "/support" },
+  { icon: FileSearch, label: "Sandbox", path: "/sandbox" },
+  { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
 export const Sidebar = () => {

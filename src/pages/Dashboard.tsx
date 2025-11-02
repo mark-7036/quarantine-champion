@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Activity, TrendingUp } from "lucide-react";
+import { Activity, Shield, AlertTriangle, Eye } from "lucide-react";
+import { StatCard } from "@/components/StatCard";
 
 interface Threat {
   name: string;
@@ -38,98 +39,129 @@ const severityColors = {
 
 const Dashboard = () => {
   return (
-    <div className="space-y-8 animate-fade-in">
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20">
-            <Activity className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-display font-bold text-foreground tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground mt-1 text-base">
-              Real-time security overview and system status
-            </p>
-          </div>
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">XDR Dashboard</h1>
+          <p className="text-muted-foreground mt-1">
+            Enterprise-grade security monitoring and threat intelligence
+          </p>
         </div>
+        <Badge className="bg-success/10 text-success border-success/30 text-sm px-3 py-1">
+          All Systems Protected
+        </Badge>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        <Card className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl shadow-2xl animate-scale-in" style={{ boxShadow: 'var(--shadow-elevated)' }}>
-          <div className="p-10">
-            <div className="flex items-center justify-between mb-10">
-              <h2 className="text-2xl font-display font-bold text-foreground">System Status</h2>
-              <div className="flex items-center gap-2 text-success">
-                <TrendingUp className="w-5 h-5" />
-                <span className="text-sm font-semibold">Protected</span>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <StatCard
+          title="System Health"
+          value="98%"
+          change="+2% from last week"
+          changeType="positive"
+          icon={Shield}
+          iconColor="text-success"
+        />
+        <StatCard
+          title="Active Threats"
+          value="3"
+          change="2 quarantined"
+          changeType="negative"
+          icon={AlertTriangle}
+          iconColor="text-critical"
+        />
+        <StatCard
+          title="Monitored Processes"
+          value="247"
+          change="Normal activity"
+          changeType="neutral"
+          icon={Eye}
+          iconColor="text-info"
+        />
+        <StatCard
+          title="Files Scanned"
+          value="847K"
+          change="Today"
+          changeType="neutral"
+          icon={Activity}
+          iconColor="text-primary"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <Card className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl animate-scale-in">
+          <div className="p-8">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-xl font-semibold text-foreground">System Status</h2>
+              <Badge className="bg-success/10 text-success border-success/30">
+                Protected
+              </Badge>
             </div>
             
             <div className="flex flex-col items-center justify-center">
-              <div className="relative w-56 h-56">
+              <div className="relative w-48 h-48">
                 <svg className="w-full h-full transform -rotate-90">
                   <circle
-                    cx="112"
-                    cy="112"
-                    r="100"
+                    cx="96"
+                    cy="96"
+                    r="88"
                     stroke="hsl(var(--muted))"
-                    strokeWidth="16"
+                    strokeWidth="12"
                     fill="none"
                     opacity="0.2"
                   />
                   <circle
-                    cx="112"
-                    cy="112"
-                    r="100"
+                    cx="96"
+                    cy="96"
+                    r="88"
                     stroke="hsl(var(--success))"
-                    strokeWidth="16"
+                    strokeWidth="12"
                     fill="none"
-                    strokeDasharray={`${(90 / 100) * 628} 628`}
+                    strokeDasharray={`${(98 / 100) * 553} 553`}
                     strokeLinecap="round"
-                    className="transition-all duration-1000 animate-scale-in"
-                    style={{ filter: 'drop-shadow(var(--glow-primary))' }}
+                    className="transition-all duration-1000"
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <span className="text-7xl font-display font-bold text-foreground tabular-nums">90</span>
-                    <div className="w-12 h-1 bg-primary/30 rounded-full mx-auto mt-2" />
+                    <span className="text-5xl font-bold text-foreground">98</span>
+                    <span className="text-2xl text-muted-foreground">%</span>
                   </div>
                 </div>
               </div>
               
-              <div className="text-center mt-10 space-y-2">
-                <p className="text-xl font-display font-semibold text-foreground">System Secure</p>
+              <div className="text-center mt-6 space-y-1">
+                <p className="text-lg font-semibold text-foreground">System Secure</p>
                 <p className="text-sm text-muted-foreground">
-                  Last Scan: <span className="text-foreground font-medium">Today, 7:05 AM</span>
+                  Last Scan: <span className="text-foreground">Today, 7:05 AM</span>
                 </p>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl shadow-2xl animate-scale-in" style={{ boxShadow: 'var(--shadow-elevated)', animationDelay: '100ms' }}>
-          <div className="p-10">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-display font-bold text-foreground">Recent Threats</h2>
-              <Badge variant="outline" className="bg-critical/10 text-critical border-critical/30 text-xs px-3 py-1">
+        <Card className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl animate-scale-in" style={{ animationDelay: '50ms' }}>
+          <div className="p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-foreground">Recent Threats</h2>
+              <Badge variant="outline" className="bg-critical/10 text-critical border-critical/30">
                 {threats.length} Active
               </Badge>
             </div>
             
-            <div className="overflow-hidden rounded-xl border border-border">
+            <div className="overflow-hidden rounded-lg border border-border">
               <table className="w-full">
                 <thead className="bg-muted/30">
                   <tr>
-                    <th className="text-left py-4 px-5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    <th className="text-left py-3 px-4 text-xs font-semibold text-muted-foreground uppercase">
                       Threat
                     </th>
-                    <th className="text-left py-4 px-5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    <th className="text-left py-3 px-4 text-xs font-semibold text-muted-foreground uppercase">
                       Severity
                     </th>
-                    <th className="text-left py-4 px-5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    <th className="text-left py-3 px-4 text-xs font-semibold text-muted-foreground uppercase">
                       Date
                     </th>
-                    <th className="text-left py-4 px-5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    <th className="text-left py-3 px-4 text-xs font-semibold text-muted-foreground uppercase">
                       Status
                     </th>
                   </tr>
@@ -141,8 +173,8 @@ const Dashboard = () => {
                       className="hover:bg-muted/20 transition-colors animate-fade-in"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      <td className="py-4 px-5 text-foreground text-sm font-medium">{threat.name}</td>
-                      <td className="py-4 px-5">
+                      <td className="py-3 px-4 text-foreground text-sm font-medium">{threat.name}</td>
+                      <td className="py-3 px-4">
                         <Badge
                           variant="outline"
                           className={`${severityColors[threat.severity]} font-medium text-xs px-3 py-1`}
@@ -150,8 +182,8 @@ const Dashboard = () => {
                           {threat.severity}
                         </Badge>
                       </td>
-                      <td className="py-4 px-5 text-muted-foreground text-sm tabular-nums">{threat.date}</td>
-                      <td className="py-4 px-5 text-muted-foreground text-sm">{threat.status}</td>
+                      <td className="py-3 px-4 text-muted-foreground text-sm">{threat.date}</td>
+                      <td className="py-3 px-4 text-muted-foreground text-sm">{threat.status}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -5,8 +5,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
+import Scanner from "./pages/Scanner";
 import Protection from "./pages/Protection";
+import Behavior from "./pages/Behavior";
+import Network from "./pages/Network";
+import Logbook from "./pages/Logbook";
 import Quarantine from "./pages/Quarantine";
+import Sandbox from "./pages/Sandbox";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,15 +26,14 @@ const App = () => (
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/scanner" element={<Scanner />} />
             <Route path="/protection" element={<Protection />} />
+            <Route path="/behavior" element={<Behavior />} />
+            <Route path="/network" element={<Network />} />
+            <Route path="/logbook" element={<Logbook />} />
             <Route path="/quarantine" element={<Quarantine />} />
-            {/* Placeholder routes */}
-            <Route path="/scans" element={<Dashboard />} />
-            <Route path="/network" element={<Dashboard />} />
-            <Route path="/firewall" element={<Dashboard />} />
-            <Route path="/alert" element={<Dashboard />} />
-            <Route path="/setting" element={<Dashboard />} />
-            <Route path="/support" element={<Dashboard />} />
+            <Route path="/sandbox" element={<Sandbox />} />
+            <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
