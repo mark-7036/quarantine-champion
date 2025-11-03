@@ -1,4 +1,4 @@
-import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen } from "lucide-react";
+import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen, Circle } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -7,10 +7,17 @@ const menuItems = [
   { icon: Search, label: "Scanner", path: "/scanner" },
   { icon: Shield, label: "Protection", path: "/protection" },
   { icon: Eye, label: "Behavior Monitor", path: "/behavior" },
-  { icon: Globe, label: "Network & Firewall", path: "/network" },
-  { icon: BookOpen, label: "Threat Logbook", path: "/logbook" },
-  { icon: Lock, label: "Quarantine", path: "/quarantine" },
+  { icon: Layers, label: "XDR Dashboard", path: "/xdr" },
+  { icon: Globe, label: "Network Traffic", path: "/network" },
+  { icon: AlertTriangle, label: "Threat Intelligence", path: "/threat-intel" },
   { icon: FileSearch, label: "Sandbox", path: "/sandbox" },
+  { icon: Activity, label: "AI/ML Analysis", path: "/ai-analysis" },
+  { icon: Lock, label: "Anti-Ransomware", path: "/ransomware" },
+  { icon: Eye, label: "Privacy Guard", path: "/privacy" },
+  { icon: Circle, label: "USB Auto-Scan", path: "/usb-scan" },
+  { icon: Circle, label: "System Optimization", path: "/optimization" },
+  { icon: BookOpen, label: "Logs & Reports", path: "/logs" },
+  { icon: Lock, label: "Quarantine", path: "/quarantine" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
