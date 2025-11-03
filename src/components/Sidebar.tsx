@@ -1,4 +1,4 @@
-import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen, Circle } from "lucide-react";
+import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen, Circle, Cpu, Globe as WebIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,8 @@ const menuItems = [
   { icon: Eye, label: "Privacy Guard", path: "/privacy" },
   { icon: Circle, label: "USB Auto-Scan", path: "/usb-scan" },
   { icon: Circle, label: "System Optimization", path: "/optimization" },
+  { icon: Cpu, label: "Advanced Process Security", path: "/advanced-process" },
+  { icon: WebIcon, label: "Web Protection", path: "/web-protection" },
   { icon: BookOpen, label: "Logs & Reports", path: "/logs" },
   { icon: Lock, label: "Quarantine", path: "/quarantine" },
   { icon: Settings, label: "Settings", path: "/settings" },

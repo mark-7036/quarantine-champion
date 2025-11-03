@@ -22,6 +22,8 @@ import Optimization from "./pages/Optimization";
 import LogsReports from "./pages/LogsReports";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import AdvancedProcessSecurity from "./pages/AdvancedProcessSecurity";
+import WebProtection from "./pages/WebProtection";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
             <Route path="/optimization" element={<Optimization />} />
             <Route path="/logs" element={<LogsReports />} />
             <Route path="/quarantine" element={<Quarantine />} />
+            <Route path="/advanced-process" element={<AdvancedProcessSecurity />} />
+            <Route path="/web-protection" element={<WebProtection />} />
             <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -1,6 +1,10 @@
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { Shield, Globe, Lock, FileSearch } from "lucide-react";
+import { Shield, Globe, Lock, FileSearch, Cpu, Brain, HardDrive, Box, CheckCircle, XCircle } from "lucide-react";
+import { StatCard } from "@/components/StatCard";
+import { Progress } from "@/components/ui/progress";
 
 const protectionFeatures = [
   {
@@ -76,6 +80,26 @@ const Protection = () => {
           </Card>
         ))}
       </div>
+
+      {/* TPM-Based System Integrity */}
+      <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Lock className="w-6 h-6 text-info" />
+            <h3 className="text-xl font-semibold text-foreground">TPM-Based System Integrity</h3>
+          </div>
+          <Badge variant="outline" className="bg-success/10 text-success border-success/30">Enabled</Badge>
+        </div>
+        <div className="space-y-6">
+          <div className="flex items-center justify-between p-4 bg-muted/20 rounded-lg border border-border">
+            <div>
+              <p className="text-sm font-medium text-foreground">Integrity Score</p>
+              <p className="text-2xl font-bold text-success mt-1">98.7%</p>
+            </div>
+            <Button className="bg-primary hover:bg-primary/90">Verify Integrity</Button>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 };

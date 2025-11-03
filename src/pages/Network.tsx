@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Globe, Shield, TrendingUp, TrendingDown, Activity } from "lucide-react";
+import { Globe, Shield, TrendingUp, TrendingDown, Activity, MapPin, Filter } from "lucide-react";
 import { StatCard } from "@/components/StatCard";
+import { Switch } from "@/components/ui/switch";
 
 export default function Network() {
   const connections = [
@@ -231,6 +232,30 @@ export default function Network() {
               ))}
             </tbody>
           </table>
+        </div>
+      </Card>
+
+      <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Shield className="w-6 h-6 text-primary" />
+            <h3 className="text-xl font-semibold text-foreground">Next-Gen Smart Firewall</h3>
+          </div>
+          <Switch checked />
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="p-4 bg-muted/20 rounded-lg border border-border">
+            <p className="text-xs text-muted-foreground uppercase mb-2">Monitored IPs</p>
+            <p className="text-2xl font-bold text-foreground">1,247</p>
+          </div>
+          <div className="p-4 bg-muted/20 rounded-lg border border-border">
+            <p className="text-xs text-muted-foreground uppercase mb-2">Active Ports</p>
+            <p className="text-2xl font-bold text-foreground">89</p>
+          </div>
+          <div className="p-4 bg-muted/20 rounded-lg border border-border">
+            <p className="text-xs text-muted-foreground uppercase mb-2">Blocked</p>
+            <p className="text-2xl font-bold text-critical">342</p>
+          </div>
         </div>
       </Card>
     </div>

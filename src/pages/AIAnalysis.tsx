@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Activity, Brain, TrendingUp, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Activity, Brain, TrendingUp, Zap, Shield, WifiOff, AlertTriangle } from "lucide-react";
 import { StatCard } from "@/components/StatCard";
+import { Progress } from "@/components/ui/progress";
 
 export default function AIAnalysis() {
   const anomalies = [
@@ -159,6 +161,47 @@ export default function AIAnalysis() {
               </div>
             </div>
           ))}
+        </div>
+      </Card>
+
+      {/* AI Threat Engine Section */}
+      <div className="col-span-full">
+        <h2 className="text-2xl font-bold text-foreground mb-4">AI Threat Engine</h2>
+      </div>
+
+      <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
+        <div className="flex items-center gap-3 mb-6">
+          <Zap className="w-6 h-6 text-warning" />
+          <h3 className="text-xl font-semibold text-foreground">IsolationForest Anomaly Detection</h3>
+        </div>
+        <div className="space-y-4">
+          <div className="p-4 bg-muted/20 rounded-lg border border-border">
+            <p className="text-sm text-muted-foreground mb-2">Anomaly Score</p>
+            <div className="flex items-center gap-4">
+              <Progress value={73} className="flex-1" />
+              <span className="text-2xl font-bold text-warning">0.73</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Shield className="w-6 h-6 text-critical" />
+            <h3 className="text-xl font-semibold text-foreground">Ransomware Behavior Detection</h3>
+          </div>
+          <Button className="bg-critical hover:bg-critical/90">Emergency Kill-Switch</Button>
+        </div>
+      </Card>
+
+      <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <WifiOff className="w-6 h-6 text-info" />
+            <h3 className="text-xl font-semibold text-foreground">Offline AI Defender</h3>
+          </div>
+          <Badge variant="outline" className="bg-success/10 text-success border-success/30">Operational</Badge>
         </div>
       </Card>
     </div>
