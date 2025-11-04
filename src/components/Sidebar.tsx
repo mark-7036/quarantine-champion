@@ -1,6 +1,7 @@
 import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen, Circle, Cpu, Globe as WebIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const menuItems = [
   { icon: Activity, label: "Dashboard", path: "/" },
@@ -35,27 +36,29 @@ export const Sidebar = () => {
         </div>
       </div>
       
-      <nav className="flex-1 p-5">
-        <ul className="space-y-1.5">
-          {menuItems.map((item, index) => (
-            <li key={item.path} className="animate-slide-in" style={{ animationDelay: `${index * 30}ms` }}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  cn(
-                    "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 group",
-                    "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                    isActive && "bg-sidebar-accent text-sidebar-accent-foreground shadow-lg"
-                  )
-                }
-              >
-                <item.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                <span className="font-medium text-sm tracking-wide">{item.label}</span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <ScrollArea className="flex-1 p-5">
+        <nav>
+          <ul className="space-y-1.5">
+            {menuItems.map((item, index) => (
+              <li key={item.path} className="animate-slide-in" style={{ animationDelay: `${index * 30}ms` }}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    cn(
+                      "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 group",
+                      "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                      isActive && "bg-sidebar-accent text-sidebar-accent-foreground shadow-lg"
+                    )
+                  }
+                >
+                  <item.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+                  <span className="font-medium text-sm tracking-wide">{item.label}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </ScrollArea>
     </aside>
   );
 };
