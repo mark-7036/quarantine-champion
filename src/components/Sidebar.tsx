@@ -1,27 +1,19 @@
-import { Shield, Activity, Search, Lock, Globe, Layers, AlertTriangle, Settings, FileSearch, Eye, BookOpen, Circle, Cpu, Globe as WebIcon } from "lucide-react";
+import { Shield, Activity, Search, Lock, Globe, Layers, Settings, FileSearch, Wrench, BookOpen, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const menuItems = [
   { icon: Activity, label: "Dashboard", path: "/" },
-  { icon: Search, label: "Scanner", path: "/scanner" },
   { icon: Shield, label: "Protection", path: "/protection" },
-  { icon: Eye, label: "Behavior Monitor", path: "/behavior" },
-  { icon: Layers, label: "XDR Dashboard", path: "/xdr" },
-  { icon: Globe, label: "Network Traffic", path: "/network" },
-  { icon: AlertTriangle, label: "Threat Intelligence", path: "/threat-intel" },
-  { icon: FileSearch, label: "Sandbox", path: "/sandbox" },
-  { icon: Activity, label: "AI/ML Analysis", path: "/ai-analysis" },
-  { icon: Lock, label: "Anti-Ransomware", path: "/ransomware" },
-  { icon: Eye, label: "Privacy Guard", path: "/privacy" },
-  { icon: Circle, label: "USB Auto-Scan", path: "/usb-scan" },
-  { icon: Circle, label: "System Optimization", path: "/optimization" },
-  { icon: Cpu, label: "Advanced Process Security", path: "/advanced-process" },
-  { icon: WebIcon, label: "Web Protection", path: "/web-protection" },
-  { icon: BookOpen, label: "Logs & Reports", path: "/logs" },
+  { icon: Search, label: "Scan & Analysis", path: "/scan-analysis" },
   { icon: Lock, label: "Quarantine", path: "/quarantine" },
+  { icon: Globe, label: "Network Security", path: "/network-security" },
+  { icon: Layers, label: "XDR Analytics", path: "/xdr-analytics" },
+  { icon: Wrench, label: "System Tools", path: "/system-tools" },
+  { icon: BookOpen, label: "Reports & Logs", path: "/reports-logs" },
   { icon: Settings, label: "Settings", path: "/settings" },
+  { icon: User, label: "Account", path: "/account" },
 ];
 
 export const Sidebar = () => {
