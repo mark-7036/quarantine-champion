@@ -15,6 +15,19 @@ import ReportsLogs from "./pages/ReportsLogs";
 import Settings from "./pages/Settings";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
+import IdentityTelemetry from "./pages/IdentityTelemetry";
+import EmailTelemetry from "./pages/EmailTelemetry";
+import CloudTelemetry from "./pages/CloudTelemetry";
+import HardwareTelemetry from "./pages/HardwareTelemetry";
+import DataEnrichment from "./pages/DataEnrichment";
+import ThreatIntelligence from "./pages/ThreatIntelligence";
+import SOARPlaybooks from "./pages/SOARPlaybooks";
+import ForensicsDashboard from "./pages/ForensicsDashboard";
+import EndpointControl from "./pages/EndpointControl";
+import HardwareSecurity from "./pages/HardwareSecurity";
+import SandboxAnalysis from "./pages/SandboxAnalysis";
+import DataLake from "./pages/DataLake";
+import ComplianceDashboard from "./pages/ComplianceDashboard";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +49,19 @@ const App = () => (
             <Route path="/reports-logs" element={<ReportsLogs />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/telemetry/identity" element={<IdentityTelemetry />} />
+            <Route path="/telemetry/email" element={<EmailTelemetry />} />
+            <Route path="/telemetry/cloud" element={<CloudTelemetry />} />
+            <Route path="/telemetry/hardware" element={<HardwareTelemetry />} />
+            <Route path="/data-enrichment" element={<DataEnrichment />} />
+            <Route path="/threat-intelligence" element={<ThreatIntelligence />} />
+            <Route path="/soar" element={<SOARPlaybooks />} />
+            <Route path="/forensics" element={<ForensicsDashboard />} />
+            <Route path="/endpoint-control" element={<EndpointControl />} />
+            <Route path="/hardware-security" element={<HardwareSecurity />} />
+            <Route path="/sandbox-analysis" element={<SandboxAnalysis />} />
+            <Route path="/data-lake" element={<DataLake />} />
+            <Route path="/compliance" element={<ComplianceDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
