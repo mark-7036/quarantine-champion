@@ -42,14 +42,43 @@ const Dashboard = () => {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">XDR Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-4xl font-display font-bold text-foreground">XDR Dashboard</h1>
+          <p className="text-lg text-muted-foreground mt-2">
             Enterprise-grade security monitoring and threat intelligence
           </p>
         </div>
-        <Badge className="bg-success/10 text-success border-success/30 text-sm px-3 py-1">
+        <Badge className="bg-success/10 text-success border-success/30 text-sm px-4 py-2">
           All Systems Protected
         </Badge>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card className="p-6 border-border bg-gradient-to-br from-critical/5 to-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-foreground">Active Incidents</h3>
+            <AlertTriangle className="w-5 h-5 text-critical" />
+          </div>
+          <p className="text-4xl font-bold text-critical mb-2">2</p>
+          <p className="text-sm text-muted-foreground">Requiring immediate attention</p>
+        </Card>
+
+        <Card className="p-6 border-border bg-gradient-to-br from-warning/5 to-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-foreground">Endpoints at Risk</h3>
+            <Eye className="w-5 h-5 text-warning" />
+          </div>
+          <p className="text-4xl font-bold text-warning mb-2">3</p>
+          <p className="text-sm text-muted-foreground">Vulnerabilities detected</p>
+        </Card>
+
+        <Card className="p-6 border-border bg-gradient-to-br from-success/5 to-card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-foreground">System Health Score</h3>
+            <Shield className="w-5 h-5 text-success" />
+          </div>
+          <p className="text-4xl font-bold text-success mb-2">98%</p>
+          <p className="text-sm text-muted-foreground">Excellent security posture</p>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

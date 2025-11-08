@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
+import Threats from "./pages/Threats";
+import Devices from "./pages/Devices";
 import Protection from "./pages/Protection";
 import ScanAnalysis from "./pages/ScanAnalysis";
 import Quarantine from "./pages/Quarantine";
@@ -14,6 +16,7 @@ import SystemTools from "./pages/SystemTools";
 import ReportsLogs from "./pages/ReportsLogs";
 import Settings from "./pages/Settings";
 import Account from "./pages/Account";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import IdentityTelemetry from "./pages/IdentityTelemetry";
 import EmailTelemetry from "./pages/EmailTelemetry";
@@ -40,6 +43,8 @@ const App = () => (
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/threats" element={<Threats />} />
+            <Route path="/devices" element={<Devices />} />
             <Route path="/protection" element={<Protection />} />
             <Route path="/scan-analysis" element={<ScanAnalysis />} />
             <Route path="/quarantine" element={<Quarantine />} />
@@ -49,6 +54,7 @@ const App = () => (
             <Route path="/reports-logs" element={<ReportsLogs />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/telemetry/identity" element={<IdentityTelemetry />} />
             <Route path="/telemetry/email" element={<EmailTelemetry />} />
             <Route path="/telemetry/cloud" element={<CloudTelemetry />} />
