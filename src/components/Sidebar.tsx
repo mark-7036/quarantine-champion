@@ -1,4 +1,4 @@
-import { Shield, Activity, Search, Lock, Globe, Layers, Settings, FileSearch, Wrench, BookOpen, User } from "lucide-react";
+import { Shield, Activity, Search, Lock, Globe, Layers, Settings, FileSearch, Wrench, BookOpen, User, Eye, Brain, Wifi, GitBranch, Target, Cloud, Smartphone, Key, Users, Package, RotateCcw, AppWindow, Usb, Cpu } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -22,15 +22,19 @@ const menuSections = [
       { icon: FileSearch, label: "Email", path: "/telemetry/email" },
       { icon: Globe, label: "Cloud", path: "/telemetry/cloud" },
       { icon: Wrench, label: "Hardware", path: "/telemetry/hardware" },
+      { icon: Wifi, label: "Network", path: "/telemetry/network" },
+      { icon: Eye, label: "Behavior Monitor", path: "/behavior-monitor" },
     ]
   },
   {
     title: "Detection & Response",
     items: [
       { icon: Layers, label: "XDR Analytics", path: "/xdr-analytics" },
+      { icon: Brain, label: "Advanced Detection", path: "/advanced-detection" },
       { icon: Shield, label: "Threat Intelligence", path: "/threat-intelligence" },
       { icon: Activity, label: "SOAR Playbooks", path: "/soar" },
       { icon: Search, label: "Data Enrichment", path: "/data-enrichment" },
+      { icon: Target, label: "Threat Hunting", path: "/threat-hunting" },
     ]
   },
   {
@@ -38,15 +42,37 @@ const menuSections = [
     items: [
       { icon: FileSearch, label: "Forensics", path: "/forensics" },
       { icon: Activity, label: "Sandbox Analysis", path: "/sandbox-analysis" },
+      { icon: GitBranch, label: "Attack Chain Viewer", path: "/attack-chain" },
+    ]
+  },
+  {
+    title: "Network & Web",
+    items: [
+      { icon: Globe, label: "Network Security", path: "/network-security" },
+      { icon: Globe, label: "Web Protection", path: "/web-protection" },
+      { icon: Globe, label: "DNS Security", path: "/dns-security" },
     ]
   },
   {
     title: "Infrastructure",
     items: [
-      { icon: Globe, label: "Network Security", path: "/network-security" },
       { icon: Activity, label: "Endpoint Control", path: "/endpoint-control" },
       { icon: Shield, label: "Hardware Security", path: "/hardware-security" },
       { icon: Activity, label: "Data Lake", path: "/data-lake" },
+      { icon: Cloud, label: "Cloud Security", path: "/cloud-security" },
+      { icon: Smartphone, label: "Mobile Security", path: "/mobile-security" },
+    ]
+  },
+  {
+    title: "Advanced Features",
+    items: [
+      { icon: Key, label: "Deception Technology", path: "/deception" },
+      { icon: Users, label: "Zero Trust", path: "/zero-trust" },
+      { icon: Package, label: "Supply Chain", path: "/supply-chain" },
+      { icon: RotateCcw, label: "Ransomware Defense", path: "/ransomware-defense" },
+      { icon: AppWindow, label: "Application Control", path: "/app-control" },
+      { icon: Usb, label: "Device Control", path: "/device-control" },
+      { icon: Cpu, label: "Process Security", path: "/process-security" },
     ]
   },
   {
