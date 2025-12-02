@@ -31,6 +31,20 @@ import HardwareSecurity from "./pages/HardwareSecurity";
 import SandboxAnalysis from "./pages/SandboxAnalysis";
 import DataLake from "./pages/DataLake";
 import ComplianceDashboard from "./pages/ComplianceDashboard";
+import NetworkTelemetry from "./pages/NetworkTelemetry";
+import BehaviorMonitor from "./pages/BehaviorMonitor";
+import AdvancedDetection from "./pages/AdvancedDetection";
+import DNSSecurity from "./pages/DNSSecurity";
+import AttackChainViewer from "./pages/AttackChainViewer";
+import ThreatHunting from "./pages/ThreatHunting";
+import CloudSecurity from "./pages/CloudSecurity";
+import MobileSecurity from "./pages/MobileSecurity";
+import DeceptionTechnology from "./pages/DeceptionTechnology";
+import ZeroTrust from "./pages/ZeroTrust";
+import SupplyChainSecurity from "./pages/SupplyChainSecurity";
+import RansomwareDefense from "./pages/RansomwareDefense";
+import ApplicationControl from "./pages/ApplicationControl";
+import DeviceControl from "./pages/DeviceControl";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +82,20 @@ const App = () => (
             <Route path="/sandbox-analysis" element={<SandboxAnalysis />} />
             <Route path="/data-lake" element={<DataLake />} />
             <Route path="/compliance" element={<ComplianceDashboard />} />
+            <Route path="/telemetry/network" element={<NetworkTelemetry />} />
+            <Route path="/behavior-monitor" element={<BehaviorMonitor />} />
+            <Route path="/advanced-detection" element={<AdvancedDetection />} />
+            <Route path="/dns-security" element={<DNSSecurity />} />
+            <Route path="/attack-chain" element={<AttackChainViewer />} />
+            <Route path="/threat-hunting" element={<ThreatHunting />} />
+            <Route path="/cloud-security" element={<CloudSecurity />} />
+            <Route path="/mobile-security" element={<MobileSecurity />} />
+            <Route path="/deception" element={<DeceptionTechnology />} />
+            <Route path="/zero-trust" element={<ZeroTrust />} />
+            <Route path="/supply-chain" element={<SupplyChainSecurity />} />
+            <Route path="/ransomware-defense" element={<RansomwareDefense />} />
+            <Route path="/app-control" element={<ApplicationControl />} />
+            <Route path="/device-control" element={<DeviceControl />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
