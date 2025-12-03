@@ -45,6 +45,8 @@ import SupplyChainSecurity from "./pages/SupplyChainSecurity";
 import RansomwareDefense from "./pages/RansomwareDefense";
 import ApplicationControl from "./pages/ApplicationControl";
 import DeviceControl from "./pages/DeviceControl";
+import WebProtection from "./pages/WebProtection";
+import AdvancedProcessSecurity from "./pages/AdvancedProcessSecurity";
 
 const queryClient = new QueryClient();
 
@@ -96,6 +98,8 @@ const App = () => (
             <Route path="/ransomware-defense" element={<RansomwareDefense />} />
             <Route path="/app-control" element={<ApplicationControl />} />
             <Route path="/device-control" element={<DeviceControl />} />
+            <Route path="/web-protection" element={<WebProtection />} />
+            <Route path="/process-security" element={<AdvancedProcessSecurity />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
