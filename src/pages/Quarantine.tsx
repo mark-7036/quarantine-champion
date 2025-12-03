@@ -1,62 +1,28 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { RotateCcw, Trash2, Shield } from "lucide-react";
 import { toast } from "sonner";
+import { PageHeader } from "@/components/PageHeader";
+import { SeverityBadge } from "@/components/SeverityBadge";
+import { DataTable } from "@/components/DataTable";
+import { SeverityLevel } from "@/lib/constants";
 
 interface QuarantineItem {
   id: string;
   fileName: string;
   threatType: string;
-  severity: "Critical" | "High" | "Medium" | "Low";
+  severity: SeverityLevel;
   dateQuarantined: string;
 }
 
 const initialItems: QuarantineItem[] = [
-  {
-    id: "1",
-    fileName: "EICAR-Test-File.exe",
-    threatType: "Test Malware",
-    severity: "Critical",
-    dateQuarantined: "5/11/2016",
-  },
-  {
-    id: "2",
-    fileName: "Malware.exe",
-    threatType: "Trojan.Generic",
-    severity: "High",
-    dateQuarantined: "10/09/2025",
-  },
-  {
-    id: "3",
-    fileName: "Suspicious.doc",
-    threatType: "Macro Virus",
-    severity: "Medium",
-    dateQuarantined: "10/08/2025",
-  },
-  {
-    id: "4",
-    fileName: "Adware_Bundle.msi",
-    threatType: "Adware",
-    severity: "Low",
-    dateQuarantined: "10/07/2025",
-  },
-  {
-    id: "5",
-    fileName: "Ransomware.crypted",
-    threatType: "Ransomware.WannaCry",
-    severity: "Critical",
-    dateQuarantined: "10/06/2025",
-  },
+  { id: "1", fileName: "EICAR-Test-File.exe", threatType: "Test Malware", severity: "Critical", dateQuarantined: "5/11/2016" },
+  { id: "2", fileName: "Malware.exe", threatType: "Trojan.Generic", severity: "High", dateQuarantined: "10/09/2025" },
+  { id: "3", fileName: "Suspicious.doc", threatType: "Macro Virus", severity: "Medium", dateQuarantined: "10/08/2025" },
+  { id: "4", fileName: "Adware_Bundle.msi", threatType: "Adware", severity: "Low", dateQuarantined: "10/07/2025" },
+  { id: "5", fileName: "Ransomware.crypted", threatType: "Ransomware.WannaCry", severity: "Critical", dateQuarantined: "10/06/2025" },
 ];
-
-const severityColors = {
-  Critical: "bg-critical/10 text-critical border-critical/30",
-  High: "bg-warning/10 text-warning border-warning/30",
-  Medium: "bg-blue-500/10 text-blue-400 border-blue-500/30",
-  Low: "bg-muted/50 text-muted-foreground border-border",
-};
 
 const Quarantine = () => {
   const [items, setItems] = useState<QuarantineItem[]>(initialItems);
@@ -73,21 +39,69 @@ const Quarantine = () => {
     toast.success(`Permanently deleted ${item?.fileName}`);
   };
 
+  const columns = [
+    {
+      key: "fileName",
+      header: "File Name",
+      render: (item: QuarantineItem) => (
+        <span className="text-foreground font-medium text-sm">{item.fileName}</span>
+      ),
+    },
+    {
+      key: "threatType",
+      header: "Threat Type",
+      render: (item: QuarantineItem) => (
+        <span className="text-muted-foreground text-sm">{item.threatType}</span>
+      ),
+    },
+    {
+      key: "severity",
+      header: "Severity",
+      render: (item: QuarantineItem) => <SeverityBadge severity={item.severity} />,
+    },
+    {
+      key: "date",
+      header: "Date",
+      render: (item: QuarantineItem) => (
+        <span className="text-muted-foreground text-sm tabular-nums">{item.dateQuarantined}</span>
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "right" as const,
+      render: (item: QuarantineItem) => (
+        <div className="flex justify-end gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleRestore(item.id)}
+            className="border-success/30 text-success hover:bg-success/10 hover:border-success/50"
+          >
+            <RotateCcw className="w-4 h-4 mr-1.5" />
+            Restore
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleDelete(item.id)}
+            className="border-critical/30 text-critical hover:bg-critical/10 hover:border-critical/50"
+          >
+            <Trash2 className="w-4 h-4 mr-1.5" />
+            Delete
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20">
-            <Shield className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-display font-bold text-foreground tracking-tight">Quarantine</h1>
-            <p className="text-muted-foreground mt-1 text-base">
-              Manage quarantined threats and restore false positives
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Quarantine"
+        description="Manage quarantined threats and restore false positives"
+        icon={Shield}
+      />
 
       <Card className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl shadow-2xl" style={{ boxShadow: 'var(--shadow-elevated)' }}>
         <div className="p-8">
@@ -110,76 +124,11 @@ const Quarantine = () => {
             </div>
           ) : (
             <div className="overflow-hidden rounded-xl border border-border">
-              <table className="w-full">
-                <thead className="bg-muted/30">
-                  <tr>
-                    <th className="text-left py-4 px-6 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      File Name
-                    </th>
-                    <th className="text-left py-4 px-6 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Threat Type
-                    </th>
-                    <th className="text-left py-4 px-6 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Severity
-                    </th>
-                    <th className="text-left py-4 px-6 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th className="text-right py-4 px-6 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border bg-card/50">
-                  {items.map((item, index) => (
-                    <tr 
-                      key={item.id} 
-                      className="hover:bg-muted/20 transition-colors animate-fade-in"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      <td className="py-5 px-6">
-                        <span className="text-foreground font-medium text-sm tracking-wide">{item.fileName}</span>
-                      </td>
-                      <td className="py-5 px-6">
-                        <span className="text-muted-foreground text-sm">{item.threatType}</span>
-                      </td>
-                      <td className="py-5 px-6">
-                        <Badge
-                          variant="outline"
-                          className={`${severityColors[item.severity]} font-medium text-xs px-3 py-1`}
-                        >
-                          {item.severity}
-                        </Badge>
-                      </td>
-                      <td className="py-5 px-6">
-                        <span className="text-muted-foreground text-sm tabular-nums">{item.dateQuarantined}</span>
-                      </td>
-                      <td className="py-5 px-6">
-                        <div className="flex justify-end gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleRestore(item.id)}
-                            className="border-success/30 text-success hover:bg-success/10 hover:border-success/50 transition-all"
-                          >
-                            <RotateCcw className="w-4 h-4 mr-1.5" />
-                            Restore
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDelete(item.id)}
-                            className="border-critical/30 text-critical hover:bg-critical/10 hover:border-critical/50 transition-all"
-                          >
-                            <Trash2 className="w-4 h-4 mr-1.5" />
-                            Delete
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <DataTable
+                columns={columns}
+                data={items}
+                keyExtractor={(item) => item.id}
+              />
             </div>
           )}
         </div>

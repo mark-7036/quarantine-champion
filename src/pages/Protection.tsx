@@ -1,10 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Shield, Globe, Lock, FileSearch, Cpu, Brain, HardDrive, Box, CheckCircle, XCircle } from "lucide-react";
-import { StatCard } from "@/components/StatCard";
-import { Progress } from "@/components/ui/progress";
+import { Shield, Globe, Lock, FileSearch } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
+import { FeatureToggleList } from "@/components/FeatureToggleList";
 
 const protectionFeatures = [
   {
@@ -36,52 +35,14 @@ const protectionFeatures = [
 const Protection = () => {
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20">
-            <Shield className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-display font-bold text-foreground tracking-tight">Protection</h1>
-            <p className="text-muted-foreground mt-1 text-base">
-              Configure your security settings and protection layers
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Protection"
+        description="Configure your security settings and protection layers"
+        icon={Shield}
+      />
 
-      <div className="grid gap-5 max-w-4xl">
-        {protectionFeatures.map((feature, index) => (
-          <Card 
-            key={feature.title}
-            className="border-border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in"
-            style={{ 
-              boxShadow: 'var(--shadow-elevated)',
-              animationDelay: `${index * 60}ms` 
-            }}
-          >
-            <div className="p-7">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-5">
-                  <div className="p-3.5 rounded-xl bg-primary/10 border border-primary/20">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-display font-semibold text-foreground text-lg">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground max-w-md leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-                <Switch 
-                  defaultChecked={feature.enabled} 
-                  className="data-[state=checked]:bg-success"
-                />
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <FeatureToggleList features={protectionFeatures} variant="card" />
 
-      {/* TPM-Based System Integrity */}
       <Card className="p-8 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border-border shadow-lg" style={{ boxShadow: 'var(--shadow-elevated)' }}>
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
