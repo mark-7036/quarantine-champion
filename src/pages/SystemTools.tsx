@@ -4,8 +4,77 @@ import { Button } from "@/components/ui/button";
 import { StatCard } from "@/components/StatCard";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { ActionDialog } from "@/components/ActionDialog";
+import { Progress } from "@/components/ui/progress";
 
 const SystemTools = () => {
+  const { toast } = useToast();
+  const [cleanupProgress, setCleanupProgress] = useState<number | null>(null);
+  const [showCleanDialog, setShowCleanDialog] = useState(false);
+  const [selectedCleanup, setSelectedCleanup] = useState<string>("");
+  const [startupPrograms, setStartupPrograms] = useState([
+    { name: "Microsoft OneDrive", publisher: "Microsoft Corporation", impact: "Low", enabled: true },
+    { name: "Steam Client", publisher: "Valve Corporation", impact: "Medium", enabled: true },
+    { name: "Adobe Creative Cloud", publisher: "Adobe Inc.", impact: "High", enabled: true },
+    { name: "Discord", publisher: "Discord Inc.", impact: "Low", enabled: true },
+    { name: "NVIDIA GeForce Experience", publisher: "NVIDIA Corporation", impact: "Medium", enabled: false },
+    { name: "Spotify", publisher: "Spotify AB", impact: "Low", enabled: false },
+  ]);
+
+  const runTool = (toolName: string) => {
+    toast({
+      title: `${toolName} Started`,
+      description: "Running system utility...",
+    });
+    
+    setCleanupProgress(0);
+    const interval = setInterval(() => {
+      setCleanupProgress((prev) => {
+        if (prev === null || prev >= 100) {
+          clearInterval(interval);
+          toast({
+            title: `${toolName} Complete`,
+            description: "Operation completed successfully",
+          });
+          setTimeout(() => setCleanupProgress(null), 1000);
+          return 100;
+        }
+        return prev + 5;
+      });
+    }, 100);
+  };
+
+  const toggleStartup = (index: number) => {
+    setStartupPrograms((prev) => {
+      const updated = [...prev];
+      updated[index].enabled = !updated[index].enabled;
+      toast({
+        title: updated[index].enabled ? "Program Enabled" : "Program Disabled",
+        description: `${updated[index].name} will ${updated[index].enabled ? "start" : "no longer start"} with Windows`,
+      });
+      return updated;
+    });
+  };
+
+  const cleanCategory = (category: string) => {
+    setSelectedCleanup(category);
+    setShowCleanDialog(true);
+  };
+
+  const confirmCleanup = () => {
+    toast({
+      title: "Cleanup Started",
+      description: `Cleaning ${selectedCleanup}...`,
+    });
+    setTimeout(() => {
+      toast({
+        title: "Cleanup Complete",
+        description: `${selectedCleanup} has been cleaned successfully`,
+      });
+    }, 2000);
+  };
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Header */}
@@ -46,11 +115,27 @@ const SystemTools = () => {
         />
       </div>
 
+      {/* Progress Bar */}
+      {cleanupProgress !== null && (
+        <Card className="p-6 bg-card border-border shadow-lg">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-foreground">Operation in Progress...</h3>
+              <Badge variant="outline" className="animate-pulse">Active</Badge>
+            </div>
+            <Progress value={cleanupProgress} className="h-3" />
+            <p className="text-sm text-muted-foreground">{cleanupProgress}% complete</p>
+          </div>
+        </Card>
+      )}
+
       {/* Quick Tools */}
       <Card className="p-6 bg-card border-border shadow-lg">
         <h3 className="text-xl font-semibold mb-6 text-foreground">Quick Tools</h3>
         <div className="grid md:grid-cols-3 gap-4">
           <Button
+            onClick={() => runTool("Disk Cleanup")}
+            disabled={cleanupProgress !== null}
             className="h-auto py-6 flex flex-col items-center gap-3 bg-primary hover:bg-primary/90"
           >
             <HardDrive className="w-8 h-8" />
@@ -61,6 +146,8 @@ const SystemTools = () => {
           </Button>
 
           <Button
+            onClick={() => runTool("Startup Optimizer")}
+            disabled={cleanupProgress !== null}
             className="h-auto py-6 flex flex-col items-center gap-3 bg-primary hover:bg-primary/90"
           >
             <Zap className="w-8 h-8" />
@@ -71,6 +158,8 @@ const SystemTools = () => {
           </Button>
 
           <Button
+            onClick={() => runTool("Vulnerability Scan")}
+            disabled={cleanupProgress !== null}
             className="h-auto py-6 flex flex-col items-center gap-3 bg-primary hover:bg-primary/90"
           >
             <Shield className="w-8 h-8" />
@@ -82,19 +171,22 @@ const SystemTools = () => {
         </div>
       </Card>
 
+      <ActionDialog
+        open={showCleanDialog}
+        onClose={() => setShowCleanDialog(false)}
+        onConfirm={confirmCleanup}
+        title={`Clean ${selectedCleanup}`}
+        description={`Are you sure you want to clean ${selectedCleanup}? This will permanently remove these files.`}
+        confirmText="Clean Now"
+        variant="warning"
+      />
+
       {/* Startup Manager */}
       <Card className="p-6 bg-card border-border shadow-lg">
         <h3 className="text-xl font-semibold mb-6 text-foreground">Startup Programs</h3>
         <div className="space-y-3">
-          {[
-            { name: "Microsoft OneDrive", publisher: "Microsoft Corporation", impact: "Low", enabled: true },
-            { name: "Steam Client", publisher: "Valve Corporation", impact: "Medium", enabled: true },
-            { name: "Adobe Creative Cloud", publisher: "Adobe Inc.", impact: "High", enabled: true },
-            { name: "Discord", publisher: "Discord Inc.", impact: "Low", enabled: true },
-            { name: "NVIDIA GeForce Experience", publisher: "NVIDIA Corporation", impact: "Medium", enabled: false },
-            { name: "Spotify", publisher: "Spotify AB", impact: "Low", enabled: false },
-          ].map((program, index) => (
-            <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-muted/50">
+          {startupPrograms.map((program, index) => (
+            <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors cursor-pointer">
               <div className="flex-1">
                 <div className="font-semibold text-foreground">{program.name}</div>
                 <div className="text-sm text-muted-foreground">{program.publisher}</div>
@@ -106,7 +198,7 @@ const SystemTools = () => {
                 }>
                   {program.impact} Impact
                 </Badge>
-                <Switch checked={program.enabled} />
+                <Switch checked={program.enabled} onCheckedChange={() => toggleStartup(index)} />
               </div>
             </div>
           ))}
@@ -148,7 +240,7 @@ const SystemTools = () => {
                     </Badge>
                   </td>
                   <td className="py-3 px-4">
-                    <Button size="sm" variant="outline">Clean</Button>
+                    <Button size="sm" variant="outline" onClick={() => cleanCategory(item.category)}>Clean</Button>
                   </td>
                 </tr>
               ))}
