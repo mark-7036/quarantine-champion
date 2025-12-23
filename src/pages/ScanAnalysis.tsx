@@ -5,10 +5,21 @@ import { Progress } from "@/components/ui/progress";
 import { StatCard } from "@/components/StatCard";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { useNavigate } from "react-router-dom";
+import SandboxPanel from "@/components/analysis/SandboxPanel";
+import ProcessAnalyzerPanel from "@/components/analysis/ProcessAnalyzerPanel";
+import AIProfilerPanel from "@/components/analysis/AIProfilerPanel";
+import MemoryScannerPanel from "@/components/analysis/MemoryScannerPanel";
 
 const ScanAnalysis = () => {
   const [scanning, setScanning] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [sandboxOpen, setSandboxOpen] = useState(false);
+  const [processAnalyzerOpen, setProcessAnalyzerOpen] = useState(false);
+  const [aiProfilerOpen, setAIProfilerOpen] = useState(false);
+  const [memoryScannerOpen, setMemoryScannerOpen] = useState(false);
+  const navigate = useNavigate();
 
   const startScan = (type: string) => {
     setScanning(true);
@@ -149,7 +160,9 @@ const ScanAnalysis = () => {
                 <div className="text-sm text-muted-foreground">Execute suspicious files in isolated environment</div>
               </div>
             </div>
-            <Button variant="outline" size="sm">Open Sandbox</Button>
+            <Button variant="outline" size="sm" onClick={() => setSandboxOpen(true)}>
+              Open Sandbox
+            </Button>
           </div>
 
           <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
@@ -160,7 +173,9 @@ const ScanAnalysis = () => {
                 <div className="text-sm text-muted-foreground">Monitor and analyze running processes</div>
               </div>
             </div>
-            <Button variant="outline" size="sm">Analyze Processes</Button>
+            <Button variant="outline" size="sm" onClick={() => setProcessAnalyzerOpen(true)}>
+              Analyze Processes
+            </Button>
           </div>
 
           <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
@@ -171,7 +186,9 @@ const ScanAnalysis = () => {
                 <div className="text-sm text-muted-foreground">Machine learning-based threat detection</div>
               </div>
             </div>
-            <Button variant="outline" size="sm">View Analysis</Button>
+            <Button variant="outline" size="sm" onClick={() => setAIProfilerOpen(true)}>
+              View Analysis
+            </Button>
           </div>
 
           <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
@@ -182,7 +199,9 @@ const ScanAnalysis = () => {
                 <div className="text-sm text-muted-foreground">Scan RAM for malicious code and exploits</div>
               </div>
             </div>
-            <Button variant="outline" size="sm">Scan Memory</Button>
+            <Button variant="outline" size="sm" onClick={() => setMemoryScannerOpen(true)}>
+              Scan Memory
+            </Button>
           </div>
         </div>
       </Card>
@@ -224,6 +243,81 @@ const ScanAnalysis = () => {
           </table>
         </div>
       </Card>
+
+      {/* Sandbox Analysis Sheet */}
+      <Sheet open={sandboxOpen} onOpenChange={setSandboxOpen}>
+        <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="flex items-center gap-2">
+              <FileSearch className="w-5 h-5 text-primary" />
+              Sandbox Analysis
+            </SheetTitle>
+            <SheetDescription>
+              Execute suspicious files in an isolated virtual environment
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6">
+            <SandboxPanel onNavigateToFull={() => {
+              setSandboxOpen(false);
+              navigate("/sandbox-analysis");
+            }} />
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Process Analyzer Sheet */}
+      <Sheet open={processAnalyzerOpen} onOpenChange={setProcessAnalyzerOpen}>
+        <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="flex items-center gap-2">
+              <Activity className="w-5 h-5 text-primary" />
+              Process Analyzer
+            </SheetTitle>
+            <SheetDescription>
+              Monitor and analyze running processes in real-time
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6">
+            <ProcessAnalyzerPanel />
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* AI Profiler Sheet */}
+      <Sheet open={aiProfilerOpen} onOpenChange={setAIProfilerOpen}>
+        <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-primary" />
+              AI/ML Behavior Profiler
+            </SheetTitle>
+            <SheetDescription>
+              Machine learning-based behavioral threat detection
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6">
+            <AIProfilerPanel />
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Memory Scanner Sheet */}
+      <Sheet open={memoryScannerOpen} onOpenChange={setMemoryScannerOpen}>
+        <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="flex items-center gap-2">
+              <Microscope className="w-5 h-5 text-primary" />
+              Memory Scanner
+            </SheetTitle>
+            <SheetDescription>
+              Scan system memory for malicious code and exploits
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6">
+            <MemoryScannerPanel />
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
